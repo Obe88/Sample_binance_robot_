@@ -1,4 +1,4 @@
-# sample_binance_robot_private_230522
+# sample_binance_robot
 
 Hello and welcome to my overly complicated Binance cex trading bot, before stating my explanation for all this bunch of published code first know this:
 
