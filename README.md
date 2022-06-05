@@ -35,13 +35,13 @@ As soon as the bot receives the update that the last price tick is a closing dat
 
 Basically i have coded the bot in a way that it uses modules as objects which are connected to the "main" bot thread, the account_information module provides it's own stream of information and is assigned it's own processing thread as well as the main bot thread so it can run independently from the main, the rest of the modules are used to figure out if there are conditions to make a move and enter or exit the market, the "trade_conditions" module evaluate the conditions to enter or exit a position(s) by receiving the data which the "main" bot thread (sample_binance_bot_3.0) holds, this module calls other modules connected to the main as the "signals" and "internal_registry" to gather the info needed to make a decision and after collecting and evaluating the data it will execute an predefined action contained in the module "operations" also connected as an object to the main.
 
-It all goes like this:
-=> "sample_binance_bot_3.0" starts
-=> "input_config" module account keys and connection information gets loaded
-=> "account_info" module is called, downloads the user's account info and connects to the user account stream (independent thread to keep updated on user account info)
-=> "get_data" module is called, downloads and proccesses the historical price data, gets loaded into python lists inside object attributes
-=> "sample_binance_bot_3.0" connects to websocket "BTCUSDT" data stream using "input_config" information to keep price data inside object attributes updated
-=> "sample_binance_bot_3.0" uses modules "internal_registry", "trade_conditions", "signals, "operations" connected as python objects to evaluate all conditions and make a move
+It all goes like this:\
+=> "sample_binance_bot_3.0" starts\
+=> "input_config" module account keys and connection information gets loaded\
+=> "account_info" module is called, downloads the user's account info and connects to the user account stream (independent thread to keep updated on user account info)\
+=> "get_data" module is called, downloads and proccesses the historical price data, gets loaded into python lists inside object attributes\
+=> "sample_binance_bot_3.0" connects to websocket "BTCUSDT" data stream using "input_config" information to keep price data inside object attributes updated\
+=> "sample_binance_bot_3.0" uses modules "internal_registry", "trade_conditions", "signals, "operations" connected as python objects to evaluate all conditions and make a move\
 => Trade automatically 24/7 non stop
 
 The bot will simply execute predefined conditions written in the "trade_conditions" module and in the "signals" module, this last module is the one used to figure out signals coming from an algorithmic trading system using technical indicators such as MACD or Simple Moving Averages (as examples), all modules connected to the main as python objects receiving price data and user account data from the websocket connections of both.
